@@ -4,11 +4,13 @@
  * title, description and path are required.
  * position,scale and rotation should probably be changed to fit the model in the canvas.
  */
+import {Vector3} from "three";
+
 export interface ModelData {
     title: string;
     description: string;
     path: string;
-    position?: number[];
+    position?: Vector3;
     scale?: number[];
     rotation?: number[];
 }
