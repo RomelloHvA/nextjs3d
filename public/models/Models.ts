@@ -4,7 +4,7 @@
  * title, description and path are required.
  * position,scale and rotation should probably be changed to fit the model in the canvas.
  */
-interface ModelData {
+export interface ModelData {
     title: string;
     description: string;
     path: string;
@@ -23,13 +23,13 @@ export const models: ModelData[] = [
     {
         title: "Axe",
         description: "",
-        path: "models/book_f.glb",
+        path: "models/chest.glb",
         scale: [0.5, 0.5, 0.5]
     },
     {
         title: "Axe",
         description: "2",
-        path: "models/book_f.glb",
+        path: "models/armored_car.glb",
         scale: [0.5, 0.5, 0.5]
     }
 
