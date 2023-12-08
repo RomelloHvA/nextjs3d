@@ -2,7 +2,7 @@ import React from "react";
 import {useGLTF} from "@react-three/drei";
 import {GLTF} from "three-stdlib";
 import * as THREE from "three";
-import {Vector3} from "three";
+import {Euler, Quaternion, Vector3} from "three";
 
 
 type GLTFResult = GLTF & {
@@ -23,19 +23,23 @@ interface ModelProps {
     path: string;           // Path to the GLTF model file
     isMovable: boolean;     // If the object can be moved through user interaction (default: false).
     position?: Vector3;    // Initial position of the model (default: [0, 1, 1.5])
-    scale?: number[];       // Initial scale of the model (default: [1, 1, 1])
-    rotation?: number[];    // Initial rotation of the model (default: [0, 0, 0])
+    scale?: Vector3;       // Initial scale of the model (default: [1, 1, 1])
+    rotation?: Euler;    // Initial rotation of the model (default: [0, 0, 0])
+    material?: THREE.Material | THREE.Material[];
 }
 
 const ModelTemplate: React.FC<ModelProps> = ({
                                                  path,
                                                  isMovable = false,
-                                                 position = [0, 1, 1.5],
-                                                 scale = [1, 1, 1],
-                                                 rotation = [0, 0, 0],
+                                                 position = new Vector3(0, 1, 1.5),
+                                                 scale = new Vector3(1,1,1),
+                                                 rotation = new Euler(0,0,0),
+                                                 material
                                              }) => {
     // Use the useGLTF hook to load and retrieve the nodes and materials of the GLTF model
+    const materialName = Array.isArray(material) ? undefined : material?.name;
     const {nodes, materials} = useGLTF(path) as GLTFResult;
+
 
     // Return a group containing meshes based on the nodes and materials of the GLTF model
     return (
@@ -45,7 +49,13 @@ const ModelTemplate: React.FC<ModelProps> = ({
                 <mesh
                     key={nodeName}
                     geometry={nodes[nodeName].geometry}
-                    material={materials && nodes[nodeName] && nodes[nodeName].material ? materials[nodes[nodeName].material.name] as THREE.MeshStandardMaterial : undefined}
+                    material={
+                        materials &&
+                        nodes[nodeName] &&
+                        materialName
+                            ? materials[materialName] as THREE.MeshStandardMaterial
+                            : undefined
+                    }
                 />
             ))}
         </group>
