@@ -2,6 +2,7 @@ import React from "react";
 import {useGLTF} from "@react-three/drei";
 import {GLTF} from "three-stdlib";
 import * as THREE from "three";
+import {Vector3} from "three";
 
 
 type GLTFResult = GLTF & {
@@ -21,7 +22,7 @@ type GLTFResult = GLTF & {
 interface ModelProps {
     path: string;           // Path to the GLTF model file
     isMovable: boolean;     // If the object can be moved through user interaction (default: false).
-    position?: number[];    // Initial position of the model (default: [0, 1, 1.5])
+    position?: Vector3;    // Initial position of the model (default: [0, 1, 1.5])
     scale?: number[];       // Initial scale of the model (default: [1, 1, 1])
     rotation?: number[];    // Initial rotation of the model (default: [0, 0, 0])
 }
