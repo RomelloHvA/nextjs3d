@@ -24,13 +24,9 @@ export default function Home() {
         const delta: number = event.deltaY;
         const scrollIncrement: number = 0.4;
         if (delta > 0) {
-            console.log(scrollIndex + " Scroll down index")
-            console.log(scrollDecimal + "Scroll down decimal")
-            setScrollDecimal((prevIndex) => (prevIndex + scrollIncrement) % models.length)
+            setScrollDecimal((prevIndex) => (prevIndex + scrollIncrement) % models.length);
         } else {
-            console.log(scrollIndex + " Scroll up index")
-            console.log(scrollDecimal + "Scroll up decimal")
-            setScrollDecimal((prevIndex) => (prevIndex - scrollIncrement + models.length) % models.length)
+            setScrollDecimal((prevIndex) => (prevIndex - scrollIncrement + models.length) % models.length);
         }
         setScrollIndex(Math.floor(scrollDecimal))
     }

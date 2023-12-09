@@ -10,9 +10,9 @@ interface ModelData {
     title: string;
     description: string;
     path: string;
-    position?: Vector3;
-    scale?: Vector3;
-    rotation?: Euler;
+    position: Vector3;
+    scale: Vector3;
+    rotation: Euler;
 }
 
 export const models: ModelData[] = [
@@ -22,6 +22,7 @@ export const models: ModelData[] = [
         path: "models/book_f.glb",
         scale: new Vector3(0.5, 0.5, 0.5),
         position: new Vector3(0, 1, 1.5),
+        rotation: new Euler(0, 0, 0),
     },
     {
         title: "Chest",
