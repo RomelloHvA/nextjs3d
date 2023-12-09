@@ -19,14 +19,14 @@ export const models: ModelData[] = [
     {
         title: "Book",
         description: "0",
-        path: "models/book_f.glb",
+        path: "models/drill.glb",
         scale: new Vector3(0.5, 0.5, 0.5),
         position: new Vector3(0, 1, 1.5),
     },
     {
         title: "Chest",
         description: "1",
-        path: "models/chest.glb",
+        path: "models/tapeMeasure.glb",
         scale: new Vector3(0.5, 0.5, 0.5),
         position: new Vector3(0, 1, 1.5),
         rotation: new Euler(0, 0, 0),
@@ -34,7 +34,7 @@ export const models: ModelData[] = [
     {
         title: "Armored car",
         description: "2",
-        path: "models/armored_car.glb",
+        path: "models/hammer.glb",
         scale: new Vector3(0.5, 0.5, 0.5),
         position: new Vector3(0, 1, 1.5),
         rotation: new Euler(0, 4, 0),
