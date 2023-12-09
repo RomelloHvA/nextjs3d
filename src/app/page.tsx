@@ -36,11 +36,11 @@ export default function Home() {
                 onWheel={handleScroll}>
                     <Suspense fallback={<ModelLoaderComponent/>}>
                         <BackgroundComponent/>
-                        <ModelComponent path={models[scrollIndex].path} isMovable={true}
+                    </Suspense>
+                    <ModelComponent path={models[scrollIndex].path} isMovable={true}
                                         rotation={models[scrollIndex].rotation}
                                         scale={models[scrollIndex].scale}
                                         position={models[scrollIndex].position}/>
-                    </Suspense>
                     {/*<OrbitControls/>*/}
                     <Environment preset="dawn"/>
                 </Canvas>

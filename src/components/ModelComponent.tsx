@@ -2,8 +2,10 @@ import React, {useRef, useState} from "react";
 import { useGLTF } from "@react-three/drei";
 import { Vector3, Euler } from "three";
 import {useFrame} from "@react-three/fiber";
+import {Suspense} from "react";
 import * as THREE from "three";
 import {is} from "@react-spring/shared";
+import ModelLoaderComponent from "@/components/ModelLoaderComponent";
 
 
 interface ModelProps {
@@ -37,10 +39,11 @@ function ModelComponent({
 
 
     return (
-
-            <primitive object={scene} position={position}
+        <Suspense fallback={<ModelLoaderComponent/>}>
+        <primitive object={scene} position={position}
                        rotation={rotation}
                        scale={scale}/>
+        </Suspense>
 
     );
 }
