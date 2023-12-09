@@ -18,7 +18,8 @@ import ModelComponent from "@/components/ModelComponent";
 export default function Home() {
 
     const [scrollIndex, setScrollIndex] = useState<number>(0);
-    const [scrollDecimal, setScrollDecimal] = useState<number>(scrollIndex)
+    const [scrollDecimal, setScrollDecimal] = useState<number>(scrollIndex);
+    const [rotate, setRotate] = useState(true);
 
     const handleScroll = (event: React.WheelEvent) => {
         const delta: number = event.deltaY;
@@ -30,20 +31,23 @@ export default function Home() {
         }
         setScrollIndex(Math.floor(scrollDecimal))
     }
-        return (
-            <div className={css.scene}>
-                <Canvas camera={{position: [0, 1, 2.5], fov: 65}}
-                onWheel={handleScroll}>
-                    <Suspense fallback={<ModelLoaderComponent/>}>
-                        <BackgroundComponent/>
-                    </Suspense>
-                    <ModelComponent path={models[scrollIndex].path} isMovable={true}
-                                        rotation={models[scrollIndex].rotation}
-                                        scale={models[scrollIndex].scale}
-                                        position={models[scrollIndex].position}/>
-                    {/*<OrbitControls/>*/}
-                    <Environment preset="dawn"/>
-                </Canvas>
-            </div>
-        )
+
+    return (
+        <div className={css.scene}>
+            <Canvas camera={{position: [0, 1, 2.5], fov: 65}}
+                    onWheel={handleScroll}
+            onPointerUp={() => setRotate(true)}>
+                <BackgroundComponent/>
+                <ModelComponent
+                    path={models[scrollIndex].path} isMovable={true}
+                    rotation={models[scrollIndex].rotation}
+                    scale={models[scrollIndex].scale}
+                    position={models[scrollIndex].position}
+                    rotate={rotate}
+                    setRotate={setRotate}/>
+                {/*<OrbitControls/>*/}
+                <Environment preset="dawn"/>
+            </Canvas>
+        </div>
+    )
 }

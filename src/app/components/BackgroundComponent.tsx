@@ -2,6 +2,8 @@ import {BackgroundModelComponent} from "@/app/components/BackGroundModelComponen
 import ModelComponent from "@/components/ModelComponent";
 import * as THREE from "three";
 import {Euler, Vector3} from "three";
+import ModelLoaderComponent from "@/components/ModelLoaderComponent";
+import React, {Suspense, useState} from "react";
 
 
 const StoneMaterial = () => {
@@ -15,24 +17,30 @@ const StoneMaterial = () => {
 };
 
 export default function BackgroundComponent() {
-    return <>
+    const [rotate, setRotate] = useState(false);
+
+    return <Suspense fallback={<ModelLoaderComponent/>}>
         <BackgroundModelComponent/>
         {/*Background house 1*/}
         <ModelComponent path={"/models/house.glb"}
                         scale={new Vector3(1,1,1)}
                         position={new Vector3(5, -0.8, -2.5)}
                         rotation={new Euler(0, -1.1, 0)}
-                        isMovable={false}/>
+                        isMovable={false}
+                        rotate={rotate}
+                        setRotate={setRotate}/>
         {/*Background house 2*/}
         <ModelComponent path={"/models/wood_house.glb"}
                         scale={new Vector3(1,1,1)}
                         position={new Vector3(-5, 0, -2.5)}
                         rotation={new Euler(0, -0.5, 0)}
-                        isMovable={false}/>
+                        isMovable={false}
+                        rotate={rotate}
+                        setRotate={setRotate}/>
         {/*    Floor */}
         <mesh position={[0, 0, 0]}>
             <boxGeometry args={[10, 0, 10]}/>
             <StoneMaterial/>
         </mesh>
-    </>;
+    </Suspense>;
 }
