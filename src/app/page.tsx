@@ -1,7 +1,7 @@
 'use client'
 import css from "../../styles/Home.module.css"
 import {Canvas} from "@react-three/fiber";
-import {Environment, OrbitControls} from "@react-three/drei";
+import {Environment, OrbitControls, useGLTF} from "@react-three/drei";
 import ModelLoaderComponent from "@/components/ModelLoaderComponent";
 import React, {Suspense, useState} from "react";
 import * as THREE from "three";
@@ -40,7 +40,10 @@ export default function Home() {
                 onWheel={handleScroll}>
                     <Suspense fallback={<ModelLoaderComponent/>}>
                         <BackgroundComponent/>
-                        <ModelComponent path={models[scrollIndex].path} isMovable={true}/>
+                        <ModelComponent path={models[scrollIndex].path} isMovable={true}
+                                        rotation={models[scrollIndex].rotation}
+                                        scale={models[scrollIndex].scale}
+                                        position={models[scrollIndex].position}/>
                     </Suspense>
                     {/*<OrbitControls/>*/}
                     <Environment preset="dawn"/>
