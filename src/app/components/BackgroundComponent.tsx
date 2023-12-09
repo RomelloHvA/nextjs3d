@@ -1,7 +1,7 @@
 import {BackgroundModelComponent} from "@/app/components/BackGroundModelComponent";
 import ModelComponent from "@/components/ModelComponent";
 import * as THREE from "three";
-import {Euler, Quaternion, Vector3} from "three";
+import {Euler, Vector3} from "three";
 
 
 const StoneMaterial = () => {
@@ -19,12 +19,14 @@ export default function BackgroundComponent() {
         <BackgroundModelComponent/>
         {/*Background house 1*/}
         <ModelComponent path={"/models/house.glb"}
-                        position={new Vector3().fromArray([5, -0.8, -2.5])}
+                        scale={new Vector3(1,1,1)}
+                        position={new Vector3(5, -0.8, -2.5)}
                         rotation={new Euler(0, -1.1, 0)}
                         isMovable={false}/>
         {/*Background house 2*/}
         <ModelComponent path={"/models/wood_house.glb"}
-                        position={new Vector3().fromArray([-5, 0, -2.5])}
+                        scale={new Vector3(1,1,1)}
+                        position={new Vector3(-5, 0, -2.5)}
                         rotation={new Euler(0, -0.5, 0)}
                         isMovable={false}/>
         {/*    Floor */}
