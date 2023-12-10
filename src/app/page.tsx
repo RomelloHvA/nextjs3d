@@ -29,20 +29,25 @@ export default function Home() {
      * Calculates the percentage until the next model based on the scrollDecimal.
      */
     const percentageUntilNextModel = (scrollDecimal * 100) % 100;
-
     /**
-     * Method for chaning the value of the scrollDecimal based on the direction of the scrolling.
+     * Method for changing the value of the scrollDecimal based on the direction of the scrolling.
      * @param event
      */
     const handleScroll = (event: React.WheelEvent) => {
         const delta: number = event.deltaY;
         const scrollIncrement: number = 0.2;
-        if (delta > 0) {
-            setScrollDecimal((prevIndex) => (prevIndex + scrollIncrement) % models.length);
-        } else {
-            setScrollDecimal((prevIndex) => (prevIndex - scrollIncrement + models.length) % models.length);
-        }
-        setScrollIndex(Math.floor(scrollDecimal))
+
+        setScrollDecimal((prevIndex) => {
+
+            let newScrollDecimal;
+            if (delta > 0) {
+                newScrollDecimal = (prevIndex + scrollIncrement) % models.length;
+            } else {
+                newScrollDecimal = (prevIndex - scrollIncrement + models.length) % models.length;
+            }
+            setScrollIndex(Math.floor(newScrollDecimal));
+            return newScrollDecimal;
+        });
     }
     /**
      * Checks the path against a valid file extension.
