@@ -12,7 +12,7 @@ import React, {Suspense, useState} from "react";
 const StoneMaterial = () => {
     const stoneTexture = new THREE.TextureLoader().load("/textures/stone_texture.jpg");
     stoneTexture.wrapS = stoneTexture.wrapT = THREE.RepeatWrapping;
-    stoneTexture.repeat.set(8,8);
+    stoneTexture.repeat.set(8, 8);
     return (
         <meshStandardMaterial map={stoneTexture}/>
     );
@@ -27,7 +27,7 @@ export default function BackgroundComponent() {
         <BackgroundModelComponent/>
         {/*Background house 1*/}
         <ModelComponent path={"/models/house.glb"}
-                        scale={new Vector3(1,1,1)}
+                        scale={new Vector3(1, 1, 1)}
                         position={new Vector3(5, -0.8, -2.5)}
                         rotation={new Euler(0, -1.1, 0)}
                         isMovable={false}
@@ -35,7 +35,7 @@ export default function BackgroundComponent() {
                         setRotate={setRotate}/>
         {/*Background house 2*/}
         <ModelComponent path={"/models/wood_house.glb"}
-                        scale={new Vector3(1,1,1)}
+                        scale={new Vector3(1, 1, 1)}
                         position={new Vector3(-5, 0, -2.5)}
                         rotation={new Euler(0, -0.5, 0)}
                         isMovable={false}

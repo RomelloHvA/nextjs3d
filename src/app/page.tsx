@@ -53,7 +53,7 @@ export default function Home() {
     /**
      * Checks the path against a valid file extension.
      */
-    const isValidPath = /\.(glb|gltf)$/.test(models[scrollIndex].path);
+    const isValidFileExtension = /\.(glb|gltf)$/.test(models[scrollIndex].path);
 
     return (
         <div className={css.scene}>
@@ -62,7 +62,7 @@ export default function Home() {
                     onPointerUp={() => setRotate(true)}>
                 <BackgroundComponent/>
                 <ModelComponent
-                    path={isValidPath ? models[scrollIndex].path : models[0].path}
+                    path={isValidFileExtension ? models[scrollIndex].path : models[0].path}
                     isMovable={true}
                     rotation={models[scrollIndex].rotation}
                     scale={models[scrollIndex].scale}
@@ -71,7 +71,7 @@ export default function Home() {
                     setRotate={setRotate}/>
                 <Html>
                     <CardComponent title={models[scrollIndex].title}
-                                   description={isValidPath ? models[scrollIndex].description : "Invalid object file!"}
+                                   description={isValidFileExtension ? models[scrollIndex].description : "Invalid file extension!"}
                                    progress={percentageUntilNextModel}/>
                 </Html>
                 <Environment preset="dawn"/>

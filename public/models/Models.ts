@@ -4,13 +4,13 @@
  * title, description and path are required.
  * position,scale and rotation should be changed to fit the model in the canvas.
  */
-import { Euler, Vector3 } from "three";
+import {Euler, Vector3} from "three";
 
 /**
  * Helper constants for initial rotation and positioning.
  */
-const INITIAL_POSITION: Vector3 = new Vector3(-0.3, 0.8, 1.5);
-const INITIAL_ROTATION: Euler = new Euler(0,0,0);
+const INITIAL_POSITION: Vector3 = new Vector3(-0.3, 0.9, 1.5);
+const INITIAL_ROTATION: Euler = new Euler(0, 0, 0);
 
 interface ModelData {
     title: string;
@@ -28,7 +28,7 @@ export const models: ModelData[] = [
             "to rotate them. Additionally, you can rotate the models by interacting with the axis lines. " +
             "Use the scrollwheel to scroll through all available models in this gallery to discover their details and descriptions.",
         path: "models/block.glb",
-        scale: new Vector3(1,1,1),
+        scale: new Vector3(1, 1, 1),
         position: INITIAL_POSITION,
         rotation: INITIAL_ROTATION
     },

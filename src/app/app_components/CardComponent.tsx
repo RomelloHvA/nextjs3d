@@ -6,6 +6,7 @@ interface CardProps {
     description: string;
     progress: number;
 }
+
 /**
  * CardComponent component for displaying a card with title, description, and progress bar.
  * @param {Object} props - React props object.
@@ -13,7 +14,7 @@ interface CardProps {
  * @param {string} props.description - The description of the card.
  * @param {number} props.progress - The progress value for the progress bar (between 0 and 100).
  */
-const CardComponent: React.FC<CardProps> = ({ title, description, progress }) => {
+const CardComponent: React.FC<CardProps> = ({title, description, progress}) => {
     return (
         <div className={css.card}>
             <h2>{title}</h2>

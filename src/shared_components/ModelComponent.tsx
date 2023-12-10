@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { TransformControls, useCursor, useGLTF } from "@react-three/drei";
-import { Vector3, Euler } from "three";
-import { useFrame } from "@react-three/fiber";
-import { Suspense } from "react";
+import React, {useState} from "react";
+import {TransformControls, useCursor, useGLTF} from "@react-three/drei";
+import {Vector3, Euler} from "three";
+import {useFrame} from "@react-three/fiber";
+import {Suspense} from "react";
 import ModelLoaderComponent from "@/shared_components/ModelLoaderComponent";
 
 /**
@@ -30,16 +30,16 @@ const DEFAULT_ROTATION_SPEED = 0.005;
  * @param rotate if the model can be rotated with or without user input.
  * @param setRotate method for changing rotate value.
  */
-function ModelComponent({ path, position, rotation, scale, isMovable, rotate, setRotate,}: ModelProps) {
+function ModelComponent({path, position, rotation, scale, isMovable, rotate, setRotate,}: ModelProps) {
 
-    const { scene } = useGLTF(path);
+    const {scene} = useGLTF(path);
     const [hovered, setHovered] = useState(false);
     useCursor(hovered);
     /**
      * Hook for rotating the model whenever possible.
      */
     useFrame(() => {
-        if (isMovable && rotate ) {
+        if (isMovable && rotate) {
             scene.rotation.y += DEFAULT_ROTATION_SPEED;
         }
     });
@@ -54,7 +54,7 @@ function ModelComponent({ path, position, rotation, scale, isMovable, rotate, se
 
 
     return (
-        <Suspense fallback={<ModelLoaderComponent />}>
+        <Suspense fallback={<ModelLoaderComponent/>}>
             <primitive
                 onPointerOver={() => setHovered(true)}
                 onPointerOut={() => setHovered(false)}

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import React from "react";
-import { useGLTF } from "@react-three/drei";
-import { GLTF } from "three-stdlib";
+import {useGLTF} from "@react-three/drei";
+import {GLTF} from "three-stdlib";
 import {JSX} from "react/jsx-runtime";
 import IntrinsicElements = JSX.IntrinsicElements;
 
@@ -29,7 +29,7 @@ type GLTFResult = GLTF & {
 };
 
 export function BackgroundModelComponent(props: IntrinsicElements["group"]) {
-    const { nodes, materials } = useGLTF("models/butcher_shop.glb") as GLTFResult;
+    const {nodes, materials} = useGLTF("models/butcher_shop.glb") as GLTFResult;
     const rotation: [number, number, number] = [0, -7.8, 0]
     return (
         <group rotation={rotation} {...props} dispose={null}>
