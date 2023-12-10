@@ -13,7 +13,44 @@ pnpm install
 # or
 bun install
 ```
+2. Build the app:
 
+```bash
+npm run build
+# or
+yarn build
+# or
+pnpm build
+# or
+bun build
+```
+
+3. Start the app locally:
+
+```bash
+npm start
+# or
+yarn start
+# or
+pnpm start
+# or
+bun start
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Development
+
+1. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
 
 2. Run the development server:
 
