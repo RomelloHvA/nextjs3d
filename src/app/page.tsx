@@ -2,11 +2,11 @@
 import css from "../../styles/Home.module.css"
 import {Canvas} from "@react-three/fiber";
 import {Environment, Html} from "@react-three/drei";
-import React, { useState } from "react";
-import BackgroundComponent from "@/app/components/BackgroundComponent";
+import React, {useState} from "react";
+import BackgroundComponent from "@/app/app_components/BackgroundComponent";
 import {models} from "../../public/models/Models";
-import ModelComponent from "@/components/ModelComponent";
-import CardComponent from "@/app/components/CardComponent";
+import ModelComponent from "@/shared_components/ModelComponent";
+import CardComponent from "@/app/app_components/CardComponent";
 
 export default function Home() {
 
@@ -34,12 +34,13 @@ export default function Home() {
      * @param event
      */
     const handleScroll = (event: React.WheelEvent) => {
+
         const delta: number = event.deltaY;
         const scrollIncrement: number = 0.2;
 
         setScrollDecimal((prevIndex) => {
-
             let newScrollDecimal;
+
             if (delta > 0) {
                 newScrollDecimal = (prevIndex + scrollIncrement) % models.length;
             } else {
@@ -58,7 +59,7 @@ export default function Home() {
         <div className={css.scene}>
             <Canvas camera={{position: [0, 1, 2.5], fov: 65}}
                     onWheel={handleScroll}
-            onPointerUp={() => setRotate(true)}>
+                    onPointerUp={() => setRotate(true)}>
                 <BackgroundComponent/>
                 <ModelComponent
                     path={isValidPath ? models[scrollIndex].path : models[0].path}

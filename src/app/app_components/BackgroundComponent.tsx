@@ -1,8 +1,8 @@
-import {BackgroundModelComponent} from "@/app/components/BackGroundModelComponent";
-import ModelComponent from "@/components/ModelComponent";
+import {BackgroundModelComponent} from "@/app/app_components/BackGroundModelComponent";
+import ModelComponent from "@/shared_components/ModelComponent";
 import * as THREE from "three";
 import {Euler, Vector3} from "three";
-import ModelLoaderComponent from "@/components/ModelLoaderComponent";
+import ModelLoaderComponent from "@/shared_components/ModelLoaderComponent";
 import React, {Suspense, useState} from "react";
 
 /**

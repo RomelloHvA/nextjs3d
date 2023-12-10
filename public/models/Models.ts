@@ -6,6 +6,12 @@
  */
 import { Euler, Vector3 } from "three";
 
+/**
+ * Helper constants for initial rotation and positioning.
+ */
+const INITIAL_POSITION: Vector3 = new Vector3(-0.3, 0.8, 1.5);
+const INITIAL_ROTATION: Euler = new Euler(0,0,0);
+
 interface ModelData {
     title: string;
     description: string;
@@ -23,16 +29,16 @@ export const models: ModelData[] = [
             "Use the scrollwheel to scroll through all available models in this gallery to discover their details and descriptions.",
         path: "models/block.glb",
         scale: new Vector3(1,1,1),
-        position: new Vector3(-0.3, 0.8, 1.5),
-        rotation: new Euler(0,0,0)
+        position: INITIAL_POSITION,
+        rotation: INITIAL_ROTATION
     },
     {
         title: "Book",
         description: "Standard magic book where nothing has been written into yet.",
         path: "models/book_f.glb",
         scale: new Vector3(0.5, 0.5, 0.5),
-        position: new Vector3(-0.3, 0.8, 1.5),
-        rotation: new Euler(0, 0, 0),
+        position: INITIAL_POSITION,
+        rotation: INITIAL_ROTATION
     },
     {
         title: "Chest",
@@ -40,8 +46,8 @@ export const models: ModelData[] = [
             "his timeless piece beckons with the anticipation of hidden treasures and stories untold.",
         path: "models/chest.glb",
         scale: new Vector3(0.2, 0.2, 0.2),
-        position: new Vector3(-0.3, 0.8, 1.5),
-        rotation: new Euler(0, 0, 0),
+        position: INITIAL_POSITION,
+        rotation: INITIAL_ROTATION
     },
     {
         title: "Armored car",
@@ -49,8 +55,8 @@ export const models: ModelData[] = [
             "With its robust exterior and cutting-edge design, this formidable vehicle commands attention on any terrain.",
         path: "models/armored_car.glb",
         scale: new Vector3(0.1, 0.1, 0.1),
-        position: new Vector3(-0.3, 0.8, 1.5),
-        rotation: new Euler(0, 4, 0),
+        position: INITIAL_POSITION,
+        rotation: INITIAL_ROTATION
     },
 ];
 

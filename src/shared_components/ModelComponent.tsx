@@ -3,7 +3,7 @@ import { TransformControls, useCursor, useGLTF } from "@react-three/drei";
 import { Vector3, Euler } from "three";
 import { useFrame } from "@react-three/fiber";
 import { Suspense } from "react";
-import ModelLoaderComponent from "@/components/ModelLoaderComponent";
+import ModelLoaderComponent from "@/shared_components/ModelLoaderComponent";
 
 /**
  * Defining all the prop types for this component.
@@ -18,7 +18,7 @@ interface ModelProps {
     setRotate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const defaultRotationSpeed = 0.005;
+const DEFAULT_ROTATION_SPEED = 0.005;
 
 /**
  * Component for loading in all models of the extension GLTF or glb
@@ -40,7 +40,7 @@ function ModelComponent({ path, position, rotation, scale, isMovable, rotate, se
      */
     useFrame(() => {
         if (isMovable && rotate ) {
-            scene.rotation.y += defaultRotationSpeed;
+            scene.rotation.y += DEFAULT_ROTATION_SPEED;
         }
     });
 
@@ -66,7 +66,7 @@ function ModelComponent({ path, position, rotation, scale, isMovable, rotate, se
                 scale={scale}
             />
 
-            {isMovable && <TransformControls object={scene} mode={"rotate"} enabled={true}/>}
+            {isMovable && <TransformControls object={scene} mode={"rotate"}/>}
         </Suspense>
     );
 }
