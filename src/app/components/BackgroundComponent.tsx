@@ -5,17 +5,21 @@ import {Euler, Vector3} from "three";
 import ModelLoaderComponent from "@/components/ModelLoaderComponent";
 import React, {Suspense, useState} from "react";
 
-
+/**
+ * Component for the floor of the background.
+ *
+ */
 const StoneMaterial = () => {
     const stoneTexture = new THREE.TextureLoader().load("/textures/stone_texture.jpg");
     stoneTexture.wrapS = stoneTexture.wrapT = THREE.RepeatWrapping;
     stoneTexture.repeat.set(8,8);
-
     return (
         <meshStandardMaterial map={stoneTexture}/>
     );
 };
-
+/**
+ * Component for all the background models and floor put together in a single component.
+ */
 export default function BackgroundComponent() {
     const [rotate, setRotate] = useState(false);
 

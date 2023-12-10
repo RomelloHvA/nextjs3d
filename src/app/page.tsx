@@ -1,29 +1,42 @@
 'use client'
 import css from "../../styles/Home.module.css"
 import {Canvas} from "@react-three/fiber";
-import {Environment, OrbitControls, useGLTF} from "@react-three/drei";
-import ModelLoaderComponent from "@/components/ModelLoaderComponent";
-import React, {Suspense, useState} from "react";
-import * as THREE from "three";
+import {Environment, Html} from "@react-three/drei";
+import React, { useState } from "react";
 import BackgroundComponent from "@/app/components/BackgroundComponent";
 import {models} from "../../public/models/Models";
 import ModelComponent from "@/components/ModelComponent";
-
-
-//Todo add introduction to the application and what it's for. Also add explanation.
-//Todo add about page
-//Todo add contact page if possible
-//Todo code documentation.
+import CardComponent from "@/app/components/CardComponent";
 
 export default function Home() {
 
+    /**
+     * scrollIndex to Determine which model to load of the array based on the scrollIndex
+     */
     const [scrollIndex, setScrollIndex] = useState<number>(0);
-    const [scrollDecimal, setScrollDecimal] = useState<number>(scrollIndex);
-    const [rotate, setRotate] = useState(true);
 
+    /**
+     * ScrollDecimal to help, so it doesn't immediately jump to a new model when scrolling.
+     */
+    const [scrollDecimal, setScrollDecimal] = useState<number>(scrollIndex);
+
+    /**
+     * rotate determines if a model can be rotated or not.
+     */
+    const [rotate, setRotate] = useState<boolean>(true);
+
+    /**
+     * Calculates the percentage until the next model based on the scrollDecimal.
+     */
+    const percentageUntilNextModel = (scrollDecimal * 100) % 100;
+
+    /**
+     * Method for chaning the value of the scrollDecimal based on the direction of the scrolling.
+     * @param event
+     */
     const handleScroll = (event: React.WheelEvent) => {
         const delta: number = event.deltaY;
-        const scrollIncrement: number = 0.4;
+        const scrollIncrement: number = 0.32;
         if (delta > 0) {
             setScrollDecimal((prevIndex) => (prevIndex + scrollIncrement) % models.length);
         } else {
@@ -31,6 +44,10 @@ export default function Home() {
         }
         setScrollIndex(Math.floor(scrollDecimal))
     }
+    /**
+     * Checks the path against a valid file extension.
+     */
+    const isValidPath = /\.(glb|gltf)$/.test(models[scrollIndex].path);
 
     return (
         <div className={css.scene}>
@@ -39,13 +56,18 @@ export default function Home() {
             onPointerUp={() => setRotate(true)}>
                 <BackgroundComponent/>
                 <ModelComponent
-                    path={models[scrollIndex].path} isMovable={true}
+                    path={isValidPath ? models[scrollIndex].path : models[0].path}
+                    isMovable={true}
                     rotation={models[scrollIndex].rotation}
                     scale={models[scrollIndex].scale}
                     position={models[scrollIndex].position}
                     rotate={rotate}
                     setRotate={setRotate}/>
-                {/*<OrbitControls/>*/}
+                <Html>
+                    <CardComponent title={models[scrollIndex].title}
+                                   description={isValidPath ? models[scrollIndex].description : "Invalid object file!"}
+                                   progress={percentageUntilNextModel}/>
+                </Html>
                 <Environment preset="dawn"/>
             </Canvas>
         </div>
