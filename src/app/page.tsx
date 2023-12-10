@@ -36,7 +36,7 @@ export default function Home() {
      */
     const handleScroll = (event: React.WheelEvent) => {
         const delta: number = event.deltaY;
-        const scrollIncrement: number = 0.32;
+        const scrollIncrement: number = 0.2;
         if (delta > 0) {
             setScrollDecimal((prevIndex) => (prevIndex + scrollIncrement) % models.length);
         } else {
