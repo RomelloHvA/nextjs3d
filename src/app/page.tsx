@@ -1,12 +1,14 @@
 'use client'
 import css from "../../styles/Home.module.css"
 import {Canvas} from "@react-three/fiber";
-import {Environment, Html} from "@react-three/drei";
+import {Environment, Html, OrbitControls} from "@react-three/drei";
 import React, {useState} from "react";
 import BackgroundComponent from "@/app/app_components/BackgroundComponent";
 import {models} from "../../public/models/Models";
 import ModelComponent from "@/shared_components/ModelComponent";
 import CardComponent from "@/app/app_components/CardComponent";
+import {Vector3, Euler} from "three";
+
 
 export default function Home() {
 
@@ -36,7 +38,7 @@ export default function Home() {
     const handleScroll = (event: React.WheelEvent) => {
 
         const delta: number = event.deltaY;
-        const scrollIncrement: number = 0.2;
+        const scrollIncrement: number = 0.1;
 
         setScrollDecimal((prevIndex) => {
             let newScrollDecimal;
@@ -55,20 +57,25 @@ export default function Home() {
      */
     const isValidFileExtension = /\.(glb|gltf)$/.test(models[scrollIndex].path);
 
+
     return (
         <div className={css.scene}>
-            <Canvas camera={{position: [0, 1, 2.5], fov: 65}}
+            <Canvas camera={{position: [0, scrollIndex, 2.5], fov: 65}}
                     onWheel={handleScroll}
                     onPointerUp={() => setRotate(true)}>
-                <BackgroundComponent/>
-                <ModelComponent
-                    path={isValidFileExtension ? models[scrollIndex].path : models[0].path}
-                    isMovable={true}
-                    rotation={models[scrollIndex].rotation}
-                    scale={models[scrollIndex].scale}
-                    position={models[scrollIndex].position}
-                    rotate={rotate}
-                    setRotate={setRotate}/>
+                {models.map((model, index) => (
+                    <ModelComponent
+                        key={index}
+                        path={isValidFileExtension ? model.path : models[0].path}
+                        isMovable={true}
+                        rotation={model.rotation}
+                        scale={model.scale}
+                        position={new Vector3(model.position.x, index - scrollDecimal, model.position.z)}
+                        rotate={rotate}
+                        setRotate={setRotate}
+                    />
+                ))}
+                {/*<OrbitControls/>*/}
                 <Html>
                     <CardComponent title={models[scrollIndex].title}
                                    description={isValidFileExtension ? models[scrollIndex].description : "Invalid file extension!"}

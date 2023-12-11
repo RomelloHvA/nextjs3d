@@ -9,7 +9,7 @@ import {Euler, Vector3} from "three";
 /**
  * Helper constants for initial rotation and positioning.
  */
-const INITIAL_POSITION: Vector3 = new Vector3(-0.3, 0.9, 1.5);
+const INITIAL_POSITION: Vector3 = new Vector3(0, 0.9, 1.5);
 const INITIAL_ROTATION: Euler = new Euler(0, 0, 0);
 
 interface ModelData {
