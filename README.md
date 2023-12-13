@@ -38,6 +38,8 @@ bun start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+It should look and function like explained in the image below: ![image](https://github.com/RomelloHvA/nextjs3d/assets/148497822/23c3ef05-7e99-4699-8705-7725fc94ec6d)
+
 
 ## Development
 
