@@ -7,8 +7,6 @@ import { Vector3 } from "three";
 import css from "../../styles/Home.module.css";
 import { models } from "../../public/models/Models";
 
-type ScaleType = Vector3;
-
 const DEFAULT_ROTATION_SPEED = 0.01;
 const DEFAULT_SCALE_INCREMENT = 0.1;
 const DEFAULT_ROTATION_DECREMENT = 0.0005;
@@ -23,13 +21,13 @@ const Home: React.FC = () => {
      * Setting up the state for the rotation speed and scale of the models.
      */
     const [rotationSpeed0, setRotationSpeed0] = useState(DEFAULT_ROTATION_SPEED);
-    const [scale0, setScale0] = useState<ScaleType>(models[0].scale);
+    const [scale0, setScale0] = useState<Vector3>(models[0].scale);
 
     const [rotationSpeed1, setRotationSpeed1] = useState(DEFAULT_ROTATION_SPEED);
-    const [scale1, setScale1] = useState<ScaleType>(models[1].scale);
+    const [scale1, setScale1] = useState<Vector3>(models[1].scale);
 
     const [rotationSpeed2, setRotationSpeed2] = useState(DEFAULT_ROTATION_SPEED);
-    const [scale2, setScale2] = useState<ScaleType>(models[2].scale);
+    const [scale2, setScale2] = useState<Vector3>(models[2].scale);
     /**
      * Function to handle the add wallet button click.
      * @param rotationSpeedUpdate function to update the rotation speed of the model.
@@ -37,7 +35,7 @@ const Home: React.FC = () => {
      */
     const handleAddWalletClick = (
         rotationSpeedUpdate: Dispatch<SetStateAction<number>>,
-        scaleUpdate: Dispatch<SetStateAction<ScaleType>>
+        scaleUpdate: Dispatch<SetStateAction<Vector3>>
     ) => () => {
         rotationSpeedUpdate((prevRotationSpeed) => prevRotationSpeed - DEFAULT_ROTATION_DECREMENT);
 
