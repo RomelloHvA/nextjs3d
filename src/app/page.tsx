@@ -1,88 +1,114 @@
-'use client'
-import css from "../../styles/Home.module.css"
-import {Canvas} from "@react-three/fiber";
-import {Environment, Html, OrbitControls} from "@react-three/drei";
-import React, {useState} from "react";
-import BackgroundComponent from "@/app/app_components/BackgroundComponent";
-import {models} from "../../public/models/Models";
-import ModelComponent from "@/shared_components/ModelComponent";
-import CardComponent from "@/app/app_components/CardComponent";
-import {Vector3, Euler} from "three";
+"use client"
+import React, { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Environment, View, Preload } from "@react-three/drei";
+import ModelComponent from "@/app/app_components/ModelComponent";
+import { Vector3 } from "three";
+import css from "../../styles/Home.module.css";
+import { models } from "../../public/models/Models";
 
+type ScaleType = Vector3;
 
-export default function Home() {
+const DEFAULT_ROTATION_SPEED = 0.01;
+const DEFAULT_SCALE_INCREMENT = 0.1;
+const DEFAULT_ROTATION_DECREMENT = 0.0005;
 
-    /**
-     * scrollIndex to Determine which model to load of the array based on the scrollIndex
-     */
-    const [scrollIndex, setScrollIndex] = useState<number>(0);
-
-    /**
-     * ScrollDecimal to help, so it doesn't immediately jump to a new model when scrolling.
-     */
-    const [scrollDecimal, setScrollDecimal] = useState<number>(scrollIndex);
+const Home: React.FC = () => {
+    const ref = useRef<any>();
+    const viewRef1 = useRef<any>();
+    const viewRef2 = useRef<any>();
+    const viewRef3 = useRef<any>();
 
     /**
-     * rotate determines if a model can be rotated or not.
+     * Setting up the state for the rotation speed and scale of the models.
      */
-    const [rotate, setRotate] = useState<boolean>(true);
+    const [rotationSpeed0, setRotationSpeed0] = useState(DEFAULT_ROTATION_SPEED);
+    const [scale0, setScale0] = useState<ScaleType>(models[0].scale);
 
+    const [rotationSpeed1, setRotationSpeed1] = useState(DEFAULT_ROTATION_SPEED);
+    const [scale1, setScale1] = useState<ScaleType>(models[1].scale);
+
+    const [rotationSpeed2, setRotationSpeed2] = useState(DEFAULT_ROTATION_SPEED);
+    const [scale2, setScale2] = useState<ScaleType>(models[2].scale);
     /**
-     * Calculates the percentage until the next model based on the scrollDecimal.
+     * Function to handle the add wallet button click.
+     * @param rotationSpeedUpdate function to update the rotation speed of the model.
+     * @param scaleUpdate function to update the scale of the model.
      */
-    const percentageUntilNextModel = (scrollDecimal * 100) % 100;
-    /**
-     * Method for changing the value of the scrollDecimal based on the direction of the scrolling.
-     * @param event
-     */
-    const handleScroll = (event: React.WheelEvent) => {
+    const handleAddWalletClick = (
+        rotationSpeedUpdate: Dispatch<SetStateAction<number>>,
+        scaleUpdate: Dispatch<SetStateAction<ScaleType>>
+    ) => () => {
+        rotationSpeedUpdate((prevRotationSpeed) => prevRotationSpeed - DEFAULT_ROTATION_DECREMENT);
 
-        const delta: number = event.deltaY;
-        const scrollIncrement: number = 0.1;
-
-        setScrollDecimal((prevIndex) => {
-            let newScrollDecimal;
-
-            if (delta > 0) {
-                newScrollDecimal = (prevIndex + scrollIncrement) % models.length;
-            } else {
-                newScrollDecimal = (prevIndex - scrollIncrement + models.length) % models.length;
-            }
-            setScrollIndex(Math.floor(newScrollDecimal));
-            return newScrollDecimal;
-        });
-    }
-    /**
-     * Checks the path against a valid file extension.
-     */
-    const isValidFileExtension = /\.(glb|gltf)$/.test(models[scrollIndex].path);
-
+        scaleUpdate((prevScale) => new Vector3(
+            prevScale.x + DEFAULT_SCALE_INCREMENT,
+            prevScale.y + DEFAULT_SCALE_INCREMENT,
+            prevScale.z + DEFAULT_SCALE_INCREMENT
+        ));
+    };
 
     return (
-        <div className={css.scene}>
-            <Canvas camera={{position: [0, scrollIndex, 2.5], fov: 65}}
-                    onWheel={handleScroll}
-                    onPointerUp={() => setRotate(true)}>
-                {models.map((model, index) => (
+        <div ref={ref} className={css.container}>
+            <div className={css.centered}>
+                <div className={css.centered}>
+                    <div ref={viewRef1} className={css.view} />
+                    <p className={css.title}>OBJECT 1 - {models[0].title}</p>
+                    <button className={css.button} type="button" onClick={handleAddWalletClick(setRotationSpeed0, setScale0)}>
+                        + Add to wallet
+                    </button>
+                </div>
+                <div className={css.centered}>
+                    <div ref={viewRef2} className={css.view} />
+                    <p className={css.title}>OBJECT 2 - {models[1].title}</p>
+                    <button className={css.button} type="button" onClick={handleAddWalletClick(setRotationSpeed1, setScale1)}>
+                        + add to wallet
+                    </button>
+                </div>
+                <div className={css.centered}>
+                    <div ref={viewRef3} className={css.view} />
+                    <p className={css.title}>OBJECT 3 - {models[2].title}</p>
+                    <button className={css.button} type="button" onClick={handleAddWalletClick(setRotationSpeed2, setScale2)}>
+                        + Add to wallet
+                    </button>
+                </div>
+                <button className={css.button} type="button"> BUY </button>
+            </div>
+            <Canvas eventSource={ref} className={css.canvas}>
+                <View track={viewRef1}>
+                    <Environment preset="dawn" />
                     <ModelComponent
-                        key={index}
-                        path={isValidFileExtension ? model.path : models[0].path}
-                        isMovable={true}
-                        rotation={model.rotation}
-                        scale={model.scale}
-                        position={new Vector3(model.position.x, index - scrollDecimal, model.position.z)}
-                        rotate={rotate}
-                        setRotate={setRotate}
+                        path={models[0].path}
+                        position={models[0].position}
+                        rotation={models[0].rotation}
+                        scale={scale0}
+                        rotationSpeed={rotationSpeed0}
                     />
-                ))}
-                {/*<OrbitControls/>*/}
-                <Html>
-                    <CardComponent title={models[scrollIndex].title}
-                                   description={isValidFileExtension ? models[scrollIndex].description : "Invalid file extension!"}
-                                   progress={percentageUntilNextModel}/>
-                </Html>
-                <Environment preset="dawn"/>
+                </View>
+                <View track={viewRef2}>
+                    <Environment preset="dawn" />
+                    <ModelComponent
+                        path={models[1].path}
+                        position={models[1].position}
+                        rotation={models[1].rotation}
+                        scale={scale1}
+                        rotationSpeed={rotationSpeed1}
+                    />
+                </View>
+                <View track={viewRef3}>
+                    <Environment preset="dawn" />
+                    <ModelComponent
+                        path={models[2].path}
+                        position={models[2].position}
+                        rotation={models[2].rotation}
+                        scale={scale2}
+                        rotationSpeed={rotationSpeed2}
+                    />
+                </View>
+                <Preload all />
             </Canvas>
         </div>
-    )
-}
+    );
+};
+
+export default Home;

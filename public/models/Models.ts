@@ -5,14 +5,15 @@
  * position,scale and rotation should be changed to fit the model in the canvas.
  */
 import {Euler, Vector3} from "three";
+import {useGLTF} from "@react-three/drei";
 
 /**
  * Helper constants for initial rotation and positioning.
  */
-const INITIAL_POSITION: Vector3 = new Vector3(0, 0.9, 1.5);
+const INITIAL_POSITION: Vector3 = new Vector3(0, 0, 0);
 const INITIAL_ROTATION: Euler = new Euler(0, 0, 0);
 
-interface ModelData {
+export interface ModelData {
     title: string;
     description: string;
     path: string;
@@ -28,7 +29,7 @@ export const models: ModelData[] = [
             "to rotate them. Additionally, you can rotate the models by interacting with the axis lines. " +
             "Use the scrollwheel to scroll through all available models in this gallery to discover their details and descriptions.",
         path: "models/block.glb",
-        scale: new Vector3(1, 1, 1),
+        scale: new Vector3(9, 9, 9),
         position: INITIAL_POSITION,
         rotation: INITIAL_ROTATION
     },
@@ -36,7 +37,7 @@ export const models: ModelData[] = [
         title: "Book",
         description: "Standard magic book where nothing has been written into yet.",
         path: "models/book_f.glb",
-        scale: new Vector3(0.5, 0.5, 0.5),
+        scale: new Vector3(4, 4, 4),
         position: INITIAL_POSITION,
         rotation: INITIAL_ROTATION
     },
@@ -45,7 +46,7 @@ export const models: ModelData[] = [
         description: "Embark on a journey with the charm of a classic chest, where secrets lie beneath the polished exterior. T" +
             "his timeless piece beckons with the anticipation of hidden treasures and stories untold.",
         path: "models/chest.glb",
-        scale: new Vector3(0.2, 0.2, 0.2),
+        scale: new Vector3(2, 2, 2),
         position: INITIAL_POSITION,
         rotation: INITIAL_ROTATION
     },
@@ -59,5 +60,4 @@ export const models: ModelData[] = [
         rotation: INITIAL_ROTATION
     },
 ];
-
 

@@ -1,9 +1,52 @@
-.scene{
-    width:100vw;
-    height:100vh;
-    background-color: black;
+.container{
+    width:100%;
+    height:100%;
+    position: relative;
+}
+.title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+.centered {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.canvas{
-    background: #000;
+.canvas {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+.view {
+    margin: 0.2em;
+    width: 100vw;
+    height: 80vh;
+    display: inline-block;
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .view {
+        height: 50vh;
+    }
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 50px;
+    background-color: aqua;
+    margin-bottom: 2em;
 }
